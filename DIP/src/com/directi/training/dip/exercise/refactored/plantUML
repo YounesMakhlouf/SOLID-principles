@@ -1,0 +1,54 @@
+@startuml
+
+interface IReader {
+    +read(): String
+}
+
+interface IWriter {
+    +write()
+}
+
+interface IEncoder {
+    +encode(data: String): String
+}
+
+class FileReader {
+    -sourcePath: String
+}
+
+class WebsiteReader {
+    -url: URL
+}
+
+class DatabaseWriter {
+}
+
+class FileWriter {
+    -destinationPath: String
+}
+
+class Base64Encoder {
+}
+
+class EncoderModule {
+    +process()
+}
+
+class EncoderModuleClient {
+}
+
+EncoderModuleClient ..> EncoderModule
+
+EncoderModule o-- IReader
+EncoderModule o-- IWriter
+EncoderModule o-- IEncoder
+
+IReader <|-- FileReader
+IReader <|-- WebsiteReader
+
+IWriter <|-- DatabaseWriter
+IWriter <|-- FileWriter
+
+IEncoder <|-- Base64Encoder
+
+@enduml
